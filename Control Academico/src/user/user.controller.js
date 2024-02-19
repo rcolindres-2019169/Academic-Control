@@ -15,11 +15,12 @@ export const save = async(req, res)=>{
         //let course = await Course.findOne({ _id: data.name }) 
         //if (!course) return res.status(404).send({ message: 'Course not found' })
         //data.role = 'STUDENT'
+        if(data.firstCourse == data.secondCourse || data.thirdCourse==data.firstCourse)
+        return res.status(500).send({message: 'Dont repeat courses'})
         let user = new User(data)
-        if(data.firstCourse == data.secondCourse ||  data.firstCourse == data.thirdCourse || data.secondCourse == data.thirdCourse)
-        return res.status(500).send
         await user.save() 
         return res.send({message: `Registered successfully, can be logged with username ${user.username}`})
+        
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error registering user', err: err})
