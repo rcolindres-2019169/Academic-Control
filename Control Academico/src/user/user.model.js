@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
     name: {
         type: String,
         required : true
     },
-    surnmae:{
+    surname:{
         type: String,
         required: true
     },
@@ -29,15 +29,22 @@ const userSchema = mongoose.Schema({
         required: true
     },
     firstCourse:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'course',
         required: true
     },
     secondCourse:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'course',
     },
-    secondCourse:{
-        type: String,
+    thirdCourse:{
+        type: Schema.Types.ObjectId,
+        ref: 'course',
+        required: false
     }
+}, {
+        versionKey: false
+    
 })
 
-export default mongoose.model('user', userSchema)
+export default model('user', userSchema)

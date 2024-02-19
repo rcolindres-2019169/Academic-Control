@@ -9,7 +9,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import { config } from "dotenv"
 import userRoutes from '../src/user/user.routes.js'
-
+import courseRoutes from '../src/course/course.routes.js'
 
 //Configuraciones
 const app = express()
@@ -24,7 +24,8 @@ app.use(helmet()) //Aplica capa de seguridad básica al servidor
 app.use(morgan('dev')) //Logs de solicitudes al servidor HTTP
 
 //Declaración de rutas
-app.use(userRoutes)
+app.use('/user',userRoutes)
+app.use('/course', courseRoutes)
 //Levantar el servidor
 export const initServer = ()=>{
     app.listen(port)
